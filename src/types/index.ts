@@ -65,8 +65,8 @@ type TProductInfoBasket = Pick<IProduct, 'title' | 'price'|'id'>;
 
 
 
-type TFormPayment = Pick<IUser, 'payment'| 'address'>;
-type TFormContacts = Pick<IUser, 'email' | 'phone'>;
+type TFormPayment = Pick<IOrder, 'payment'| 'address'>;
+type TFormContacts = Pick<IOrder, 'email' | 'phone'>;
 
 enum Events {
     PRODUCT_CHANGED = 'products:changed',

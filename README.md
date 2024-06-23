@@ -144,11 +144,11 @@ interface IModelData {
 
 Данные пользователя в форме оплаты
 ```
-type TFormPayment = Pick<IUserData, 'payment'| 'address'>;
+type TFormPayment = Pick<IOrder, 'payment'| 'address'>;
 ```
 Данные пользователя в форме контактов
 ```
-type TFormContacts = Pick<IUserData, 'email' | 'phone'>;
+type TFormContacts = Pick<IOrder, 'email' | 'phone'>;
 ```
 
 ## Архитектура приложения
