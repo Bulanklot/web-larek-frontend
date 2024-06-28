@@ -1,14 +1,96 @@
 // интерфейсы для объектов хранящих данные 
+export type ApiListResponse<Type> = {
+    total: number,
+    items: Type []
+};
 
-interface IProduct { // данные о товаре
-    title : string;
-    image: string;
-    id: string;
-    category: string;
-    price: number | null;
-    description: string; 
+export type ApiPostMethods = 'PUT' | 'POST' | 'DELETE';
+
+export type FormErrors = Partial<Record<keyof IOrder, string>>;
+
+export type PaymentType = 'cash' | 'online';
+
+export type OrderForm = Omit<IOrder, 'total' | 'items'>;
+
+export type ProductId = Omit <IProduct, 'id'>
+
+export interface IFormStatus {
+    valid: boolean;
+    errors: string[];
 }
 
+export interface IEvents {
+    on <T extends object>(event: string, callback: (data: T) => void): void;
+    emit <T extends object>(event: string, data?: T): void;
+    trigger<T extends object>(event : string, context? : Partial <T>): (data: T) => void;
+}
+
+export interface IPaymentForm {
+    payment: PaymentType;
+    address: string;
+}
+
+export interface IContactsForm {
+    email : string;
+    phone: string;
+}
+
+export interface IOrder extends IPaymentForm , IContactsForm {
+    items : string[];
+    total : number;
+}
+
+export interface IBasket {
+    items : string[];
+    total : number;
+}
+
+export interface IProduct {
+    id: string;
+    description: string; 
+    image: string;
+    title : string;
+    category: string;
+    price: number | null;
+}
+
+export interface IorderResult {
+    id: string;
+    total: number;
+}
+
+export interface IComplete {
+    total: number;
+}
+
+export interface IActions {
+    onClick : ()=> void;
+}
+
+export interface IModal {
+    content: HTMLElement;
+}
+
+export interface ILarekApi {
+    getProductList: () => Promise<IProduct[]>;
+    getProductItem: (id: string) => Promise<IProduct>;
+    orderList: (order: IOrder) => Promise<IorderResult>;
+}
+
+export interface IPage {
+    catalog: HTMLElement[];
+    counter: number;
+    locked: boolean;
+}
+
+export const categorySettings:{[key:string]: string} = {
+    "софт-скил": "card__category_soft",
+    "хард-скил": "card__category_hard",
+    "кнопка": "card__category_button",
+    "дополнительное": "card__category_additional",
+    "другое": "card__category_other"
+}
+/*
 interface IOrder { // данные о пользователе
     payment : string;
     email: string;
@@ -42,6 +124,7 @@ interface IOrderResult { // ответ от сервера
     error?: string;
 }
   
+
 //модель
 interface IModelData {
   products: IProduct[];
@@ -56,7 +139,7 @@ interface IModelData {
   clearBasket():void;
   clearOrder():void;
   setOrderField():void;
-  validateOrder():void;
+  validateOrder(data: Record<keyof TFormPayment & TFormContacts, string>): boolean;
 }
 
 // отображение в каталоге и в корзине 
@@ -83,3 +166,4 @@ enum Events {
     ORDER_READY = 'order:ready',
     FORM_ERRORS_CHANGED = "form:errorsChanged",
 }
+*/
