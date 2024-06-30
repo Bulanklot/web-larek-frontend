@@ -113,14 +113,14 @@ events.on('preview:change', (item:IProduct) => {
     onClick: () => {
         if(appData.inBasket(item)) {
             appData.removeFromBasket(item);
-            product.buttonTitle = 'В корзинну';
+            product.buttonTitle = 'В корзину';
         } else {
             appData.addToBasket(item);
             product.buttonTitle = 'Убрать из корзины';
         }
     }
  })
- product.buttonTitle = appData.inBasket(item) ? 'Убрать из списка' : 'В корзину';
+ product.buttonTitle = appData.inBasket(item) ? 'Убрать из корзины' : 'В корзину';
 
  modal.render({
     content: product.render({
@@ -158,9 +158,6 @@ events.on('modal:open', () => {
     page.locked = true;
 });
 
-events.on('modal:open', () => {
-    page.locked = true;
-});
 
 events.on('modal:close', () => {
     page.locked = false;
@@ -168,5 +165,7 @@ events.on('modal:close', () => {
 
 api.getProductList()
 .then(appData.setItems.bind(appData))
-.catch(console.error)
+.catch(err => console.log(err));
+
+
 

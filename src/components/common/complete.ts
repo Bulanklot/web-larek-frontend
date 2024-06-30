@@ -4,9 +4,9 @@ import { Component } from "../base/component";
 import { EventEmitter } from "../base/events";
 
 export class Complete extends Component<IComplete> {
-    protected _close: HTMLElement;
     protected _totalPrice: HTMLElement;
     protected _events: EventEmitter;
+    protected _close: HTMLElement;
     
     constructor(container: HTMLElement, events: EventEmitter) {
         super(container);

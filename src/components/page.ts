@@ -19,7 +19,7 @@ export class Page extends View<IPage> {
         this._basket = ensureElement('.header__basket');
 
         this._basket.addEventListener('click', () => {
-            this.events.emit('bids:open');
+            this.events.emit('basket:open');
         });
     }
 

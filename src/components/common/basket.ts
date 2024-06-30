@@ -10,9 +10,9 @@ export class Basket extends View<IBasket> {
 
     constructor(container: HTMLElement, events: EventEmitter) {
         super(events, container);
-        this._itemList = ensureElement<HTMLElement>(`.basket__list`, this.container);
-        this._total = ensureElement<HTMLElement>(`.basket__price`, this.container);
-        this._button = ensureElement<HTMLElement>(`.basket__button`, this.container);
+        this._itemList = ensureElement<HTMLElement>('.basket__list', this.container);
+        this._total = ensureElement<HTMLElement>('.basket__price', this.container);
+        this._button = ensureElement<HTMLElement>('.basket__button', this.container);
 
         if(this._button){
             this._button.addEventListener('click', ()=> {
@@ -23,7 +23,10 @@ export class Basket extends View<IBasket> {
     }
 
     set items(items: HTMLElement[]) {
-        console.log(items)
+        let itemNumber = 1;
+        items.forEach((item) => {
+            item.querySelector('.basket__item-index').textContent = String(itemNumber++);
+        });
         if(items.length) {
             this._itemList.replaceChildren(...items);
             this.setDisabled(this._button, false);

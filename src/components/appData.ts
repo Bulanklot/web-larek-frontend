@@ -26,7 +26,7 @@ export class AppData {
 
     setItems(items: IProduct[]) {
         this.items = items;
-        this.events.emit('items: change', this.items);
+        this.events.emit('items:change', this.items);
     }
 
     setPreview(item: IProduct) {
@@ -45,14 +45,14 @@ export class AppData {
 
     removeFromBasket(item: IProduct) {
         this.basket.items = this.basket.items.filter(id => id !== item.id);
-        this.basket.total += item.price;
+        this.basket.total -= item.price;
         this.events.emit('basket:change', this.basket);
     }
 
     clearBasket() {
         this.basket.items = [];
         this.basket.total = 0;
-        this.events.emit('basket: change', this.basket);
+        this.events.emit('basket:change', this.basket);
     }
 
     setOrder(field: keyof OrderForm, value: string) {

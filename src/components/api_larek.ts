@@ -1,7 +1,7 @@
 import { Api } from "./base/api";
-import { ApiListResponse, ILarekApi, IOrder, IProduct, IorderResult } from "../types";
+import { ApiListResponse, IOrder, IProduct, IOrderResult, IApiLarek } from "../types";
 
-export class ApiLarek extends Api implements ILarekApi {
+export class ApiLarek extends Api implements IApiLarek {
     readonly cdn: string;
 
     constructor (cdn: string, baseUrl: string, options?: RequestInit) {
@@ -10,7 +10,7 @@ export class ApiLarek extends Api implements ILarekApi {
     }
 
     getProductList(): Promise<IProduct[]> {
-        return this.get(`/product`).then((data: ApiListResponse<IProduct>) =>
+        return this.get('/product').then((data: ApiListResponse<IProduct>) =>
           data.items.map((item) => ({
             ...item,
             image: this.cdn + item.image
@@ -19,17 +19,16 @@ export class ApiLarek extends Api implements ILarekApi {
     }
 
     getProductItem(id:string): Promise<IProduct> {
-        return this.get(`/product/${id}`).then(
-            (item: IProduct) => ({
+        return this.get(`/product/${id}`)
+        .then((item: IProduct) => ({
                 ...item,
                 image: this.cdn + item.image,
             })
         );
     }
 
-    orderList(order: IOrder): Promise<IorderResult> {
-        return this.post(`/order`, order). then(
-            (data: IorderResult) => data
-        );
+    orderList(order: IOrder): Promise<IOrderResult> {
+        return this.post(`/order`, order).
+        then((data: IOrderResult) => data);
     } 
 }
