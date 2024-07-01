@@ -1,7 +1,7 @@
-import { IComplete } from "../../types";
-import { ensureElement } from "../../utils/utils";
-import { Component } from "../base/component";
-import { EventEmitter } from "../base/events";
+import { IComplete } from "../types";
+import { ensureElement } from "../utils/utils";
+import { Component } from "./base/component";
+import { EventEmitter } from "./base/events";
 
 export class Complete extends Component<IComplete> {
     protected _totalPrice: HTMLElement;

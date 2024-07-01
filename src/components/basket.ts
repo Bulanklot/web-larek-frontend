@@ -1,7 +1,7 @@
-import { IBasket } from "../../types";
-import { createElement, ensureElement } from "../../utils/utils";
-import { EventEmitter } from "../base/events";
-import { View } from "../base/view";
+import { IBasket } from "../types";
+import { createElement, ensureElement } from "../utils/utils";
+import { EventEmitter } from "./base/events";
+import { View } from "./base/view";
 
 export class Basket extends View<IBasket> {
     protected _itemList: HTMLElement;
@@ -23,10 +23,6 @@ export class Basket extends View<IBasket> {
     }
 
     set items(items: HTMLElement[]) {
-        let itemNumber = 1;
-        items.forEach((item) => {
-            item.querySelector('.basket__item-index').textContent = String(itemNumber++);
-        });
         if(items.length) {
             this._itemList.replaceChildren(...items);
             this.setDisabled(this._button, false);
@@ -39,6 +35,6 @@ export class Basket extends View<IBasket> {
     }
 
     set total(total: number) {
-        this.setText(this._total, String(total));
+        this.setText(this._total,(total)?  `${String(total)} синапсов` : '');
     }
 }

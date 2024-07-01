@@ -15,6 +15,7 @@ export type OrderForm = Omit<IOrder, 'total' | 'items'>;
 export type ProductId = Omit <IProduct, 'id'>;
 
 export interface IProduct {
+    index: string;
     id: string;
     description: string; 
     image: string;

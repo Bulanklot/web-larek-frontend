@@ -34,7 +34,7 @@ export class ProductView extends Component<ProductId> {
     disablePriceButton(value: number | null) {
     if(!value) {
         if(this._button){
-            this._button.disabled = true;
+            this.setDisabled(this._button, true);
         }
     }
 }
@@ -74,16 +74,12 @@ export class ProductView extends Component<ProductId> {
       return this._category.textContent || '';
    }
 
-   set index(value: string) {
-    this._index.textContent = value;
-   }
-
-   get index(): string {
-     return this._index.textContent || '';
+   set index(value: number) {
+    this.setText(this._index, value);
    }
 
    set image(value: string) {
-    this.setImage(this._image, value, this.title)
+    this.setImage(this._image, value, this.title);
    }
 
    set description(value: string) {

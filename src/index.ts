@@ -1,11 +1,11 @@
 import { AppData } from './components/appData';
 import { ContactForm, PaymentForm } from './components/order';
 import { Page } from './components/page';
-import { ApiLarek } from './components/api_larek';
+import { ApiLarek } from './components/apiLarek';
 import { EventEmitter } from './components/base/events';
 import { Modal } from './components/common/modal';
-import { Basket } from './components/common/basket';
-import { Complete } from './components/common/complete';
+import { Basket } from './components/basket';
+import { Complete } from './components/complete';
 import './scss/styles.scss';
 import { IContactsForm, IOrder, IProduct } from './types';
 import { API_URL, CDN_URL } from './utils/constants';
@@ -141,7 +141,7 @@ events.on('basket:open', () => {
 
 events.on('basket:change', () => {
     page.counter = appData.basket.items.length;
-    basket.items = appData.basket.items.map(id => {
+    basket.items = appData.basket.items.map((id, index) => {
         const item = appData.items.find(item => item.id === id);
 
         const product = new ProductView(cloneTemplate(productBasketTemplate), {
@@ -149,7 +149,11 @@ events.on('basket:change', () => {
                 appData.removeFromBasket(item);
             }
         })
-        return product.render(item);
+        return product.render({
+            index: String(index + 1),
+            title: item.title,
+            price: item.price
+        });
     })
     basket.total = appData.basket.total;
 });
