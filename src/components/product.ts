@@ -56,7 +56,7 @@ export class ProductView extends Component<ProductId> {
    }
 
    set price(value: number | null) {
-    this.setText(this._price, (value) ? `${value.toString()} синапсов` : '');
+    this.setText(this._price, (value) ? `${value.toString()} синапсов` : 'Бесценно');
     this.disablePriceButton(value);
    }
 
